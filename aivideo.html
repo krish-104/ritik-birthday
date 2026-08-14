@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Video</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* ==============================
+           VIDEO AREA
+        ============================== */
+
+        .video-section {
+            width: 100%;
+            min-height: 100vh;
+            min-height: 100svh;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+            background: #000;
+        }
+
+        .video-wrapper {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .intro-video {
+            display: block;
+
+            width: 100%;
+            height: auto;
+
+            /*
+             * contain = video ka poora frame dikhega.
+             * Koi part crop nahi hoga.
+             */
+            object-fit: contain;
+
+            background: #000;
+
+            border-radius: 12px;
+
+            /*
+             * Desktop par video ko bahut bada
+             * hone se control karta hai.
+             */
+            max-width: 1400px;
+            max-height: 82vh;
+            max-height: 82svh;
+        }
+
+        /* Desktop horizontal video */
+        .desktop-video {
+            display: block;
+        }
+
+        /* Mobile vertical video */
+        .mobile-video {
+            display: none;
+        }
+
+
+        /* ==============================
+           BUTTON
+        ============================== */
+
+        .birthday-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-top: 28px;
+
+            min-width: 230px;
+            padding: 15px 30px;
+
+            border: 1px solid rgba(255, 215, 120, 0.7);
+            border-radius: 50px;
+
+            background: linear-gradient(
+                135deg,
+                #d4af37,
+                #f7d774,
+                #b8860b
+            );
+
+            color: #210b12;
+
+            font-size: 15px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+
+            text-decoration: none;
+
+            box-shadow:
+                0 8px 30px rgba(212, 175, 55, 0.25);
+
+            transition:
+                transform 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .birthday-button:hover {
+            transform: translateY(-3px) scale(1.03);
+
+            box-shadow:
+                0 12px 40px rgba(212, 175, 55, 0.4);
+        }
+
+        .birthday-button:active {
+            transform: scale(0.97);
+        }
+
+
+        /* ==============================
+           MOBILE
+        ============================== */
+
+        @media (max-width: 768px) {
+
+            .video-section {
+                min-height: 100svh;
+
+                padding: 15px;
+                padding-top: 20px;
+                padding-bottom: 25px;
+
+                justify-content: center;
+            }
+
+            .desktop-video {
+                display: none;
+            }
+
+            .mobile-video {
+                display: block;
+            }
+
+            .intro-video {
+                /*
+                 * Vertical video poora dikhega.
+                 * Crop nahi hoga.
+                 */
+                width: 100%;
+                height: auto;
+
+                max-width: 100%;
+                max-height: 78svh;
+
+                object-fit: contain;
+
+                border-radius: 10px;
+            }
+
+            .birthday-button {
+                width: min(90%, 320px);
+
+                margin-top: 22px;
+
+                padding: 15px 22px;
+
+                font-size: 14px;
+            }
+        }
+
+
+        /* ==============================
+           VERY SMALL PHONES
+        ============================== */
+
+        @media (max-width: 380px) {
+
+            .video-section {
+                padding: 10px;
+            }
+
+            .intro-video {
+                max-height: 75svh;
+            }
+
+            .birthday-button {
+                margin-top: 16px;
+                min-width: 210px;
+                padding: 13px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- =====================================
+         VIDEO + BUTTON
+    ====================================== -->
+
+    <main class="video-section">
+
+        <div class="video-wrapper">
+
+            <!-- DESKTOP / LAPTOP HORIZONTAL VIDEO -->
+
+            <video
+                id="desktopVideo"
+                class="intro-video desktop-video"
+                autoplay
+                muted
+                playsinline
+                preload="auto"
+                controls>
+
+                <source
+                    src="YOUR_HORIZONTAL_VIDEO_LINK_HERE.mp4"
+                    type="video/mp4">
+
+                Your browser does not support video.
+            </video>
+
+
+            <!-- MOBILE / PHONE VERTICAL VIDEO -->
+
+            <video
+                id="mobileVideo"
+                class="intro-video mobile-video"
+                autoplay
+                muted
+                playsinline
+                preload="auto"
+                controls>
+
+                <source
+                    src="YOUR_VERTICAL_VIDEO_LINK_HERE.mp4"
+                    type="video/mp4">
+
+                Your browser does not support video.
+            </video>
+
+        </div>
+
+
+        <!-- VIDEO KE NICHE BUTTON -->
+
+        <a
+            href="birthday.html"
+            class="birthday-button">
+
+            🎂 Enter Birthday Celebration ✨
+
+        </a>
+
+    </main>
+
+
+    <script>
+
+        const desktopVideo =
+            document.getElementById("desktopVideo");
+
+        const mobileVideo =
+            document.getElementById("mobileVideo");
+
+
+        /* =====================================
+           DEVICE KE ACCORDING VIDEO
+        ===================================== */
+
+        function getActiveVideo() {
+
+            return window.innerWidth <= 768
+                ? mobileVideo
+                : desktopVideo;
+
+        }
+
+
+        /* =====================================
+           AUTOPLAY
+        ===================================== */
+
+        window.addEventListener("load", () => {
+
+            const video = getActiveVideo();
+
+            video.muted = true;
+
+            video.play().catch(() => {
+
+                /*
+                 * Agar browser autoplay block kare,
+                 * user video ke Play button se start
+                 * kar sakta hai.
+                 */
+
+                console.log(
+                    "Autoplay blocked. Use the video Play button."
+                );
+
+            });
+
+        });
+
+
+        /* =====================================
+           VIDEO END
+
+           Video khatam hone ke baad:
+           - page automatically scroll nahi hoga
+           - button wahi niche visible rahega
+           - user button click karke birthday.html
+             par jayega
+        ===================================== */
+
+        desktopVideo.addEventListener("ended", () => {
+
+            console.log(
+                "Desktop video finished."
+            );
+
+        });
+
+
+        mobileVideo.addEventListener("ended", () => {
+
+            console.log(
+                "Mobile video finished."
+            );
+
+        });
+
+    </script>
+
+</body>
+</html>
