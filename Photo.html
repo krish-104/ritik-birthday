@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Beautiful Memories 💙</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      color: #fff;
+
+      background:
+        radial-gradient(circle at 50% 35%,
+          rgba(255,255,255,.35),
+          transparent 25%),
+        radial-gradient(circle at 15% 80%,
+          rgba(255,105,180,.45),
+          transparent 30%),
+        radial-gradient(circle at 85% 20%,
+          rgba(255,182,193,.5),
+          transparent 30%),
+        linear-gradient(
+          135deg,
+          #ffb6d9,
+          #ff8fc4 45%,
+          #ff5da8
+        );
+
+      overflow: hidden;
+    }
+
+    /* =====================================================
+       BACKGROUND
+    ===================================================== */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .glow {
+      position: absolute;
+      width: 350px;
+      height: 350px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .35;
+      animation: glowMove 9s ease-in-out infinite alternate;
+    }
+
+    .glow-1 {
+      background: #ffffff;
+      left: -120px;
+      top: 10%;
+    }
+
+    .glow-2 {
+      background: #008cff;
+      right: -120px;
+      bottom: 10%;
+      animation-delay: 2s;
+    }
+
+    .glow-3 {
+      background: #ff3f9c;
+      left: 40%;
+      bottom: -180px;
+      animation-delay: 4s;
+    }
+
+    @keyframes glowMove {
+      from {
+        transform: translate(0,0) scale(1);
+      }
+
+      to {
+        transform: translate(45px,-35px) scale(1.25);
+      }
+    }
+
+    /* =====================================================
+       PAGE
+    ===================================================== */
+
+    .page {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      min-height: 600px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      padding: 30px 20px;
+
+      z-index: 2;
+    }
+
+    /* =====================================================
+       TITLE
+    ===================================================== */
+
+    .heading {
+      text-align: center;
+      z-index: 20;
+
+      margin-top: 10px;
+
+      animation:
+        headingReveal 1.2s ease forwards;
+    }
+
+    .small-title {
+      font-size: clamp(12px,1.5vw,18px);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      font-weight: 700;
+
+      color: rgba(255,255,255,.9);
+
+      text-shadow:
+        0 0 15px rgba(255,255,255,.8);
+    }
+
+    .main-title {
+      margin-top: 10px;
+
+      font-family: Georgia, serif;
+
+      font-size: clamp(38px,6vw,75px);
+      line-height: 1;
+
+      color: #fff;
+
+      text-shadow:
+        0 0 15px #168cff,
+        0 0 35px rgba(0,120,255,.7);
+    }
+
+    .subtitle {
+      margin-top: 12px;
+
+      font-size: clamp(14px,2vw,20px);
+
+      color: rgba(255,255,255,.92);
+
+      letter-spacing: 1px;
+    }
+
+    @keyframes headingReveal {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+        filter: blur(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+        filter: blur(0);
+      }
+    }
+
+    /* =====================================================
+       PHOTO STAGE
+    ===================================================== */
+
+    .photo-stage {
+      position: relative;
+
+      width: min(900px, 92vw);
+      height: min(620px, 68vh);
+
+      margin-top: 15px;
+
+      perspective: 1400px;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    /* =====================================================
+       PHOTO FRAME
+    ===================================================== */
+
+    .photo-frame {
+      position: absolute;
+
+      width: clamp(180px, 24vw, 285px);
+      aspect-ratio: 4 / 5;
+
+      padding: 10px;
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #d9f3ff,
+          #49b8ff 35%,
+          #0875d1 70%,
+          #bcecff
+        );
+
+      border: 2px solid rgba(255,255,255,.8);
+
+      box-shadow:
+        0 0 10px rgba(0,160,255,.8),
+        0 0 35px rgba(0,120,255,.65),
+        0 25px 60px rgba(70,0,90,.35);
+
+      transform-style: preserve-3d;
+
+      opacity: 0;
+
+      animation:
+        frameEnter 1.4s cubic-bezier(.17,.84,.44,1) forwards,
+        frameFloat 5s ease-in-out infinite;
+    }
+
+    .photo-frame::before {
+      content: "";
+
+      position: absolute;
+      inset: -4px;
+
+      border-radius: 24px;
+
+      border: 1px solid rgba(150,230,255,.8);
+
+      box-shadow:
+        inset 0 0 15px rgba(255,255,255,.5);
+
+      pointer-events: none;
+    }
+
+    .photo {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      border-radius: 12px;
+
+      display: block;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffc5e0,
+          #7fcaff
+        );
+    }
+
+    /* =====================================================
+       FRAME POSITIONS
+    ===================================================== */
+
+    .frame-1 {
+      z-index: 6;
+
+      left: 50%;
+      top: 50%;
+
+      --x: -50%;
+      --y: -50%;
+
+      transform:
+        translate(-50%,-50%)
+        rotate(-3deg);
+
+      animation-delay: .2s, 1.6s;
+    }
+
+    .frame-2 {
+      z-index: 5;
+
+      left: 25%;
+      top: 50%;
+
+      --x: -50%;
+      --y: -50%;
+
+      transform:
+        translate(-50%,-50%)
+        rotate(-12deg);
+
+      animation-delay: .5s, 2s;
+    }
+
+    .frame-3 {
+      z-index: 5;
+
+      right: 25%;
+      top: 50%;
+
+      --x: 50%;
+      --y: -50%;
+
+      transform:
+        translate(50%,-50%)
+        rotate(12deg);
+
+      animation-delay: .8s, 2.4s;
+    }
+
+    .frame-4 {
+      z-index: 3;
+
+      left: 8%;
+      top: 25%;
+
+      --x: 0;
+      --y: 0;
+
+      transform: rotate(-18deg);
+
+      animation-delay: 1.1s, 2.8s;
+    }
+
+    .frame-5 {
+      z-index: 3;
+
+      right: 8%;
+      top: 25%;
+
+      --x: 0;
+      --y: 0;
+
+      transform: rotate(18deg);
+
+      animation-delay: 1.4s, 3.2s;
+    }
+
+    @keyframes frameEnter {
+
+      from {
+        opacity: 0;
+
+        transform:
+          translate(
+            var(--x),
+            calc(var(--y) + 80px)
+          )
+          scale(.55)
+          rotate(0deg);
+
+        filter: blur(12px);
+      }
+
+      to {
+        opacity: 1;
+
+        filter: blur(0);
+      }
+    }
+
+    @keyframes frameFloat {
+
+      0%,100% {
+        margin-top: 0;
+      }
+
+      50% {
+        margin-top: -14px;
+      }
+    }
+
+    /* =====================================================
+       HOVER
+    ===================================================== */
+
+    .photo-frame:hover {
+      z-index: 20;
+
+      transform:
+        translate(var(--x),var(--y))
+        scale(1.08)
+        rotate(0deg);
+
+      box-shadow:
+        0 0 15px rgba(0,200,255,1),
+        0 0 50px rgba(0,130,255,.9),
+        0 30px 70px rgba(50,0,80,.45);
+
+      transition:
+        transform .5s cubic-bezier(.17,.84,.44,1),
+        box-shadow .5s ease;
+    }
+
+    /* =====================================================
+       FRAME SHINE
+    ===================================================== */
+
+    .photo-frame::after {
+      content: "";
+
+      position: absolute;
+
+      width: 50%;
+      height: 160%;
+
+      top: -30%;
+      left: -80%;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255,255,255,.55),
+          transparent
+        );
+
+      transform: rotate(25deg);
+
+      animation:
+        shine 5s ease-in-out infinite;
+    }
+
+    @keyframes shine {
+
+      0% {
+        left: -90%;
+      }
+
+      35%,100% {
+        left: 150%;
+      }
+    }
+
+    /* =====================================================
+       FLOATING HEARTS
+    ===================================================== */
+
+    .floating {
+      position: fixed;
+
+      bottom: -60px;
+
+      font-size: var(--size);
+
+      left: var(--left);
+
+      pointer-events: none;
+
+      animation:
+        rise var(--duration) linear var(--delay) infinite;
+
+      z-index: 1;
+    }
+
+    @keyframes rise {
+
+      0% {
+        transform:
+          translateY(0)
+          rotate(0deg)
+          scale(.7);
+
+        opacity: 0;
+      }
+
+      10% {
+        opacity: .8;
+      }
+
+      50% {
+        transform:
+          translateY(-50vh)
+          translateX(30px)
+          rotate(15deg)
+          scale(1);
+      }
+
+      100% {
+        transform:
+          translateY(-115vh)
+          translateX(-25px)
+          rotate(-15deg)
+          scale(.7);
+
+        opacity: 0;
+      }
+    }
+
+    /* =====================================================
+       BOTTOM TEXT
+    ===================================================== */
+
+    .bottom-message {
+      position: absolute;
+
+      bottom: 25px;
+
+      font-size: clamp(13px,1.5vw,18px);
+
+      letter-spacing: 2px;
+
+      color: rgba(255,255,255,.9);
+
+      text-shadow:
+        0 0 15px rgba(0,120,255,.7);
+
+      animation:
+        bottomPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes bottomPulse {
+
+      0%,100% {
+        opacity: .65;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    /* =====================================================
+       MOBILE
+    ===================================================== */
+
+    @media(max-width:700px) {
+
+      .page {
+        min-height: 100svh;
+        padding: 22px 12px;
+      }
+
+      .photo-stage {
+        width: 100%;
+        height: 68vh;
+
+        margin-top: 5px;
+      }
+
+      .photo-frame {
+        width: clamp(145px,42vw,210px);
+
+        padding: 7px;
+
+        border-radius: 15px;
+      }
+
+      .frame-1 {
+        left: 50%;
+        top: 50%;
+      }
+
+      .frame-2 {
+        left: 18%;
+        top: 53%;
+
+        transform:
+          translate(-50%,-50%)
+          rotate(-13deg)
+          scale(.82);
+      }
+
+      .frame-3 {
+        right: 18%;
+        top: 53%;
+
+        transform:
+          translate(50%,-50%)
+          rotate(13deg)
+          scale(.82);
+      }
+
+      .frame-4 {
+        left: 2%;
+        top: 20%;
+
+        transform:
+          rotate(-15deg)
+          scale(.62);
+      }
+
+      .frame-5 {
+        right: 2%;
+        top: 20%;
+
+        transform:
+          rotate(15deg)
+          scale(.62);
+      }
+
+      .photo-frame:hover {
+        transform:
+          translate(var(--x),var(--y))
+          scale(1.04)
+          rotate(0deg);
+      }
+
+      .bottom-message {
+        bottom: 15px;
+      }
+    }
+
+    @media(max-width:420px) {
+
+      .photo-frame {
+        width: 150px;
+      }
+
+      .frame-2 {
+        left: 14%;
+        transform:
+          translate(-50%,-50%)
+          rotate(-12deg)
+          scale(.75);
+      }
+
+      .frame-3 {
+        right: 14%;
+        transform:
+          translate(50%,-50%)
+          rotate(12deg)
+          scale(.75);
+      }
+
+      .frame-4,
+      .frame-5 {
+        display: none;
+      }
+    }
+
+    /* =====================================================
+       REDUCED MOTION
+    ===================================================== */
+
+    @media(prefers-reduced-motion:reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- Background -->
+  <div class="background">
+    <div class="glow glow-1"></div>
+    <div class="glow glow-2"></div>
+    <div class="glow glow-3"></div>
+  </div>
+
+
+  <!-- Floating Hearts -->
+  <div class="floating"
+       style="--left:5%;--size:30px;--duration:9s;--delay:0s;">
+    💗
+  </div>
+
+  <div class="floating"
+       style="--left:15%;--size:24px;--duration:11s;--delay:2s;">
+    ✨
+  </div>
+
+  <div class="floating"
+       style="--left:28%;--size:32px;--duration:10s;--delay:4s;">
+    💕
+  </div>
+
+  <div class="floating"
+       style="--left:42%;--size:25px;--duration:12s;--delay:1s;">
+    💖
+  </div>
+
+  <div class="floating"
+       style="--left:57%;--size:34px;--duration:9s;--delay:5s;">
+    ✨
+  </div>
+
+  <div class="floating"
+       style="--left:70%;--size:27px;--duration:11s;--delay:3s;">
+    💙
+  </div>
+
+  <div class="floating"
+       style="--left:83%;--size:32px;--duration:10s;--delay:6s;">
+    💗
+  </div>
+
+  <div class="floating"
+       style="--left:94%;--size:25px;--duration:12s;--delay:2s;">
+    ✨
+  </div>
+
+
+  <!-- Main -->
+  <main class="page">
+
+    <!-- Heading -->
+    <header class="heading">
+
+      <div class="small-title">
+        ✨ Our Beautiful Memories ✨
+      </div>
+
+      <h1 class="main-title">
+        Little Moments,
+        <br>
+        Big Memories 💙
+      </h1>
+
+      <p class="subtitle">
+        Every picture has a story... 📸
+      </p>
+
+    </header>
+
+
+    <!-- Photo Stage -->
+    <section class="photo-stage">
+
+      <!-- PHOTO 1 -->
+      <div class="photo-frame frame-1">
+
+        <!-- Yahan apni first photo lagao -->
+        <img
+          class="photo"
+          src="image/photo1.jpeg"
+          alt="Beautiful memory 1"
+        >
+
+      </div>
+
+
+      <!-- PHOTO 2 -->
+      <div class="photo-frame frame-2">
+
+        <!-- Yahan second photo -->
+        <img
+          class="photo"
+          src="images/photo2.jpg"
+          alt="Beautiful memory 2"
+        >
+
+      </div>
+
+
+      <!-- PHOTO 3 -->
+      <div class="photo-frame frame-3">
+
+        <!-- Yahan third photo -->
+        <img
+          class="photo"
+          src="images/photo3.jpg"
+          alt="Beautiful memory 3"
+        >
+
+      </div>
+
+
+      <!-- PHOTO 4 -->
+      <div class="photo-frame frame-4">
+
+        <!-- Yahan fourth photo -->
+        <img
+          class="photo"
+          src="images/photo4.jpg"
+          alt="Beautiful memory 4"
+        >
+
+      </div>
+
+
+      <!-- PHOTO 5 -->
+      <div class="photo-frame frame-5">
+
+        <!-- Yahan fifth photo -->
+        <img
+          class="photo"
+          src="images/photo5.jpg"
+          alt="Beautiful memory 5"
+        >
+
+      </div>
+
+    </section>
+
+
+    <div class="bottom-message">
+      Made with lots of love for Ridhi 💙✨
+    </div>
+
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>Our Little Reels 💕</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+
+html,body{
+  min-height:100%;
+}
+
+body{
+  font-family:Arial,Helvetica,sans-serif;
+  color:white;
+  overflow-x:hidden;
+
+  background:
+    radial-gradient(circle at 50% 15%,rgba(255,255,255,.32),transparent 28%),
+    radial-gradient(circle at 10% 80%,rgba(255,105,180,.5),transparent 32%),
+    radial-gradient(circle at 90% 30%,rgba(255,182,193,.45),transparent 30%),
+    linear-gradient(135deg,#ffb6d9,#ff8fc4 45%,#ff5da8);
+}
+
+/* =====================================================
+   BACKGROUND
+===================================================== */
+
+.background{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:-10;
+}
+
+.glow{
+  position:absolute;
+  width:350px;
+  height:350px;
+  border-radius:50%;
+  filter:blur(100px);
+  opacity:.35;
+  animation:glowMove 10s ease-in-out infinite alternate;
+}
+
+.glow.one{
+  background:#fff;
+  left:-100px;
+  top:-120px;
+}
+
+.glow.two{
+  background:#008cff;
+  right:-150px;
+  top:25%;
+  animation-delay:2s;
+}
+
+.glow.three{
+  background:#ff168b;
+  left:35%;
+  bottom:-180px;
+  animation-delay:4s;
+}
+
+@keyframes glowMove{
+  from{transform:translate(0,0) scale(1)}
+  to{transform:translate(50px,-35px) scale(1.25)}
+}
+
+/* =====================================================
+   FLOATING EMOJIS
+===================================================== */
+
+.floating{
+  position:fixed;
+  bottom:-80px;
+  left:var(--left);
+  font-size:var(--size);
+  pointer-events:none;
+  animation:floatUp var(--duration) linear var(--delay) infinite;
+  opacity:0;
+  z-index:-1;
+}
+
+@keyframes floatUp{
+  0%{
+    transform:translateY(0) translateX(0) rotate(0) scale(.7);
+    opacity:0;
+  }
+
+  10%{opacity:.8}
+
+  50%{
+    transform:translateY(-50vh) translateX(35px) rotate(15deg) scale(1);
+  }
+
+  100%{
+    transform:translateY(-115vh) translateX(-30px) rotate(-15deg) scale(.7);
+    opacity:0;
+  }
+}
+
+/* =====================================================
+   PAGE
+===================================================== */
+
+.page{
+  width:100%;
+  min-height:100vh;
+  padding:35px 20px 70px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* =====================================================
+   HEADER
+===================================================== */
+
+.header{
+  text-align:center;
+  max-width:800px;
+  animation:headerReveal 1.2s ease forwards;
+}
+
+@keyframes headerReveal{
+  from{
+    opacity:0;
+    transform:translateY(-30px);
+    filter:blur(8px);
+  }
+
+  to{
+    opacity:1;
+    transform:translateY(0);
+    filter:blur(0);
+  }
+}
+
+.mini-title{
+  font-size:clamp(12px,1.5vw,18px);
+  text-transform:uppercase;
+  letter-spacing:5px;
+  font-weight:700;
+  text-shadow:0 0 15px rgba(255,255,255,.7);
+}
+
+.title{
+  margin-top:12px;
+  font-family:Georgia,"Times New Roman",serif;
+  font-size:clamp(42px,7vw,82px);
+  line-height:.95;
+  text-shadow:
+    0 0 15px #008cff,
+    0 0 40px rgba(0,130,255,.7);
+}
+
+.subtitle{
+  margin-top:18px;
+  font-size:clamp(14px,2vw,20px);
+  line-height:1.6;
+}
+
+/* =====================================================
+   REELS GRID
+===================================================== */
+
+.reels-grid{
+  width:min(1200px,100%);
+  margin-top:45px;
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:25px;
+}
+
+.reel-card{
+  position:relative;
+  aspect-ratio:9/16;
+  border-radius:25px;
+  padding:7px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #e9f9ff,
+      #52c2ff 30%,
+      #0875d1 65%,
+      #b9efff
+    );
+
+  border:1px solid rgba(255,255,255,.8);
+
+  box-shadow:
+    0 0 12px rgba(0,150,255,.85),
+    0 0 35px rgba(0,120,255,.55),
+    0 20px 55px rgba(75,0,80,.3);
+
+  cursor:pointer;
+
+  transform:rotate(var(--rotation));
+
+  transition:.55s cubic-bezier(.17,.84,.44,1);
+}
+
+.reel-card:nth-child(1){--rotation:-2deg}
+.reel-card:nth-child(2){--rotation:2deg}
+.reel-card:nth-child(3){--rotation:-1deg}
+.reel-card:nth-child(4){--rotation:3deg}
+.reel-card:nth-child(5){--rotation:1deg}
+.reel-card:nth-child(6){--rotation:-3deg}
+.reel-card:nth-child(7){--rotation:2deg}
+.reel-card:nth-child(8){--rotation:-2deg}
+
+.reel-card:hover{
+  transform:translateY(-15px) rotate(0) scale(1.035);
+  box-shadow:
+    0 0 20px rgba(0,200,255,1),
+    0 0 55px rgba(0,130,255,.9),
+    0 30px 70px rgba(65,0,90,.4);
+  z-index:10;
+}
+
+.reel-preview{
+  position:relative;
+  width:100%;
+  height:100%;
+  border-radius:19px;
+  overflow:hidden;
+  background:#ff75b6;
+}
+
+.reel-preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:.7s ease;
+}
+
+.reel-card:hover img{
+  transform:scale(1.08);
+  filter:brightness(.78);
+}
+
+.reel-overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+
+  background:linear-gradient(
+    to top,
+    rgba(15,0,25,.75),
+    rgba(0,0,0,.1),
+    rgba(0,0,0,.3)
+  );
+}
+
+.play-button{
+  width:70px;
+  height:70px;
+  border-radius:50%;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  background:rgba(255,255,255,.92);
+  color:#0875d1;
+  font-size:25px;
+  padding-left:4px;
+
+  box-shadow:
+    0 0 0 7px rgba(255,255,255,.15),
+    0 0 35px rgba(0,160,255,.9);
+
+  animation:playPulse 2s ease-in-out infinite;
+}
+
+@keyframes playPulse{
+  0%,100%{
+    box-shadow:
+      0 0 0 7px rgba(255,255,255,.15),
+      0 0 25px rgba(0,160,255,.7);
+  }
+
+  50%{
+    box-shadow:
+      0 0 0 13px rgba(255,255,255,.08),
+      0 0 45px rgba(0,160,255,1);
+  }
+}
+
+.watch-text{
+  margin-top:18px;
+  font-size:15px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.reel-number{
+  position:absolute;
+  top:15px;
+  left:15px;
+  padding:6px 10px;
+  border-radius:50px;
+  background:rgba(0,0,0,.3);
+  backdrop-filter:blur(10px);
+  font-size:11px;
+  font-weight:700;
+}
+
+/* =====================================================
+   VIDEO MODAL
+===================================================== */
+
+.modal{
+  position:fixed;
+  inset:0;
+  z-index:1000;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:20px;
+
+  background:
+    radial-gradient(
+      circle at 50% 50%,
+      rgba(20,40,100,.22),
+      rgba(8,0,20,.93)
+    );
+
+  backdrop-filter:blur(16px);
+
+  opacity:0;
+  visibility:hidden;
+
+  transition:
+    opacity .45s ease,
+    visibility .45s ease;
+
+  overflow:hidden;
+}
+
+.modal.active{
+  opacity:1;
+  visibility:visible;
+}
+
+/* =====================================================
+   DJ LIGHTING STAGE
+===================================================== */
+
+.dj-stage{
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  overflow:hidden;
+}
+
+/* =====================================================
+   LEFT / RIGHT SPOTLIGHTS
+===================================================== */
+
+.dj-light{
+  position:absolute;
+
+  width:320px;
+  height:900px;
+
+  top:-150px;
+
+  filter:blur(3px);
+
+  opacity:0;
+
+  transform-origin:top center;
+
+  transition:opacity .5s ease;
+}
+
+.modal.active .dj-light{
+  opacity:1;
+}
+
+.dj-light.left{
+  left:-80px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(0,190,255,.9),
+      rgba(0,140,255,.2),
+      transparent
+    );
+
+  clip-path:polygon(
+    45% 0,
+    58% 0,
+    100% 100%,
+    0 100%
+  );
+
+  animation:
+    leftBeam 4s ease-in-out infinite alternate;
+}
+
+.dj-light.right{
+  right:-80px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,60,190,.9),
+      rgba(255,40,150,.2),
+      transparent
+    );
+
+  clip-path:polygon(
+    42% 0,
+    55% 0,
+    100% 100%,
+    0 100%
+  );
+
+  animation:
+    rightBeam 4.5s ease-in-out infinite alternate;
+}
+
+@keyframes leftBeam{
+  from{
+    transform:rotate(-30deg);
+  }
+
+  to{
+    transform:rotate(18deg);
+  }
+}
+
+@keyframes rightBeam{
+  from{
+    transform:rotate(30deg);
+  }
+
+  to{
+    transform:rotate(-18deg);
+  }
+}
+
+/* =====================================================
+   SECOND LASER BEAMS
+===================================================== */
+
+.laser{
+  position:absolute;
+
+  width:4px;
+  height:120vh;
+
+  top:-10vh;
+
+  opacity:.75;
+
+  filter:
+    blur(1px)
+    drop-shadow(0 0 8px currentColor)
+    drop-shadow(0 0 20px currentColor);
+
+  transform-origin:center;
+
+  animation:laserMove 5s ease-in-out infinite alternate;
+}
+
+.laser.l1{
+  left:8%;
+  color:#00d9ff;
+  background:#00d9ff;
+  transform:rotate(30deg);
+}
+
+.laser.l2{
+  left:17%;
+  color:#7c4dff;
+  background:#7c4dff;
+  animation-delay:1s;
+}
+
+.laser.l3{
+  right:8%;
+  color:#ff35c8;
+  background:#ff35c8;
+  transform:rotate(-30deg);
+  animation-delay:1.5s;
+}
+
+.laser.l4{
+  right:17%;
+  color:#00eaff;
+  background:#00eaff;
+  animation-delay:2s;
+}
+
+@keyframes laserMove{
+  from{
+    transform:rotate(-35deg) translateX(-30px);
+    opacity:.35;
+  }
+
+  to{
+    transform:rotate(35deg) translateX(30px);
+    opacity:.9;
+  }
+}
+
+/* =====================================================
+   MOVING LIGHT DOTS
+===================================================== */
+
+.light-particles{
+  position:absolute;
+  inset:0;
+}
+
+.light-particles span{
+  position:absolute;
+
+  width:6px;
+  height:6px;
+
+  border-radius:50%;
+
+  background:#fff;
+
+  box-shadow:
+    0 0 8px #fff,
+    0 0 20px #00cfff,
+    0 0 35px #ff36c8;
+
+  animation:
+    particleMove var(--duration) linear infinite;
+
+  left:var(--left);
+  top:var(--top);
+
+  opacity:0;
+}
+
+@keyframes particleMove{
+
+  0%{
+    transform:
+      translateY(50px)
+      scale(.3);
+
+    opacity:0;
+  }
+
+  20%{
+    opacity:1;
+  }
+
+  80%{
+    opacity:.8;
+  }
+
+  100%{
+    transform:
+      translateY(-180px)
+      translateX(var(--move))
+      scale(1.5);
+
+    opacity:0;
+  }
+}
+
+/* =====================================================
+   DJ EQUALIZER
+===================================================== */
+
+.equalizer{
+  position:absolute;
+
+  bottom:35px;
+
+  left:50%;
+
+  transform:translateX(-50%);
+
+  display:flex;
+
+  align-items:flex-end;
+
+  gap:5px;
+
+  height:55px;
+
+  opacity:0;
+
+  transition:opacity .5s ease;
+}
+
+.modal.active .equalizer{
+  opacity:.8;
+}
+
+.equalizer span{
+  width:5px;
+
+  height:20px;
+
+  border-radius:10px;
+
+  background:
+    linear-gradient(
+      to top,
+      #00cfff,
+      #ff3fc8
+    );
+
+  box-shadow:
+    0 0 10px #00cfff;
+
+  animation:
+    equalize var(--speed) ease-in-out infinite alternate;
+}
+
+@keyframes equalize{
+  from{
+    height:8px;
+  }
+
+  to{
+    height:var(--height);
+  }
+}
+
+/* =====================================================
+   VIDEO CONTAINER
+===================================================== */
+
+.video-container{
+  position:relative;
+  z-index:50;
+
+  width:min(430px,78vw);
+  height:min(760px,88vh);
+
+  border-radius:25px;
+
+  padding:6px;
+
+  background:
+    linear-gradient(
+      145deg,
+      #e9f9ff,
+      #46baff,
+      #0875d1,
+      #ff42c8
+    );
+
+  box-shadow:
+    0 0 20px rgba(0,180,255,1),
+    0 0 55px rgba(0,110,255,.8),
+    0 0 90px rgba(255,40,180,.45),
+    0 30px 100px rgba(0,0,0,.7);
+
+  transform:
+    scale(.75)
+    translateY(50px);
+
+  transition:
+    transform .6s cubic-bezier(.17,.84,.44,1);
+}
+
+.modal.active .video-container{
+  transform:
+    scale(1)
+    translateY(0);
+}
+
+.video-container video{
+  width:100%;
+  height:100%;
+
+  object-fit:cover;
+
+  border-radius:20px;
+
+  display:block;
+
+  background:#050505;
+}
+
+/* =====================================================
+   VIDEO FRAME GLOW
+===================================================== */
+
+.video-container::before{
+  content:"";
+
+  position:absolute;
+
+  inset:-15px;
+
+  border-radius:35px;
+
+  border:1px solid rgba(0,220,255,.5);
+
+  box-shadow:
+    0 0 20px rgba(0,220,255,.5),
+    0 0 45px rgba(255,50,200,.25);
+
+  animation:
+    framePulse 2.5s ease-in-out infinite;
+
+  pointer-events:none;
+}
+
+@keyframes framePulse{
+  0%,100%{
+    opacity:.4;
+    transform:scale(.98);
+  }
+
+  50%{
+    opacity:1;
+    transform:scale(1.015);
+  }
+}
+
+/* =====================================================
+   CLOSE BUTTON
+===================================================== */
+
+.close-button{
+  position:absolute;
+
+  top:-20px;
+  right:-20px;
+
+  width:50px;
+  height:50px;
+
+  border-radius:50%;
+
+  border:2px solid rgba(255,255,255,.8);
+
+  background:
+    linear-gradient(
+      145deg,
+      #70d4ff,
+      #0875d1,
+      #ff35b9
+    );
+
+  color:white;
+
+  font-size:26px;
+
+  cursor:pointer;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  box-shadow:
+    0 0 25px rgba(0,160,255,.9),
+    0 0 25px rgba(255,40,180,.6);
+
+  z-index:100;
+
+  transition:.3s ease;
+}
+
+.close-button:hover{
+  transform:rotate(90deg) scale(1.1);
+}
+
+/* =====================================================
+   BOTTOM MESSAGE
+===================================================== */
+
+.bottom-message{
+  margin-top:45px;
+  text-align:center;
+  font-size:clamp(14px,2vw,19px);
+  letter-spacing:1px;
+  text-shadow:0 0 15px rgba(0,130,255,.8);
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:1000px){
+
+  .reels-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+    gap:20px;
+  }
+}
+
+@media(max-width:700px){
+
+  .page{
+    padding:25px 14px 60px;
+  }
+
+  .reels-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:16px;
+    margin-top:30px;
+  }
+
+  .reel-card{
+    border-radius:18px;
+    padding:5px;
+  }
+
+  .reel-preview{
+    border-radius:14px;
+  }
+
+  .play-button{
+    width:54px;
+    height:54px;
+    font-size:19px;
+  }
+
+  .watch-text{
+    margin-top:12px;
+    font-size:12px;
+  }
+
+  .video-container{
+    width:min(390px,75vw);
+    height:min(700px,84vh);
+  }
+
+  .dj-light{
+    width:180px;
+    height:700px;
+  }
+
+  .laser{
+    width:2px;
+  }
+
+  .close-button{
+    top:-15px;
+    right:-10px;
+    width:43px;
+    height:43px;
+    font-size:21px;
+  }
+}
+
+@media(max-width:430px){
+
+  .video-container{
+    width:72vw;
+    height:80vh;
+  }
+
+  .dj-light{
+    width:130px;
+  }
+
+  .equalizer{
+    bottom:20px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- =====================================================
+     BACKGROUND
+===================================================== -->
+
+<div class="background">
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+  <div class="glow three"></div>
+</div>
+
+<!-- FLOATING EMOJIS -->
+
+<div class="floating"
+style="--left:5%;--size:30px;--duration:9s;--delay:0s">💗</div>
+
+<div class="floating"
+style="--left:18%;--size:25px;--duration:11s;--delay:2s">✨</div>
+
+<div class="floating"
+style="--left:35%;--size:32px;--duration:10s;--delay:4s">💕</div>
+
+<div class="floating"
+style="--left:55%;--size:28px;--duration:12s;--delay:1s">💖</div>
+
+<div class="floating"
+style="--left:75%;--size:34px;--duration:9s;--delay:5s">✨</div>
+
+<div class="floating"
+style="--left:92%;--size:28px;--duration:11s;--delay:3s">💗</div>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main class="page">
+
+<header class="header">
+
+  <div class="mini-title">
+    ✨ Special Moments ✨
+  </div>
+
+  <h1 class="title">
+    Our Little<br>
+    Reels 💕
+  </h1>
+
+  <p class="subtitle">
+    Some moments are too beautiful<br>
+    to stay only in our memories... 🎬💗
+  </p>
+
+</header>
+
+
+<section class="reels-grid">
+
+<!-- REEL 01 -->
+
+<article
+class="reel-card"
+data-video="reels/reel1.mp4"
+onclick="openReel(this)">
+
+<div class="reel-preview">
+
+<img
+src="images/reel-cover-1.jpg"
+alt="Reel 1">
+
+<div class="reel-number">
+REEL 01
+</div>
+
+<div class="reel-overlay">
+
+<div class="play-button">▶</div>
+
+<div class="watch-text">
+TAP TO WATCH 💕
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- REEL 02 -->
+
+<article
+class="reel-card"
+data-video="reels/reel2.mp4"
+onclick="openReel(this)">
+
+<div class="reel-preview">
+
+<img
+src="images/reel-cover-2.jpg"
+alt="Reel 2">
+
+<div class="reel-number">
+REEL 02
+</div>
+
+<div class="reel-overlay">
+
+<div class="play-button">▶</div>
+
+<div class="watch-text">
+TAP TO WATCH 💗
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- REEL 03 -->
+
+<article
+class="reel-card"
+data-video="reels/reel3.mp4"
+onclick="openReel(this)">
+
+<div class="reel-preview">
+
+<img
+src="images/reel-cover-3.jpg"
+alt="Reel 3">
+
+<div class="reel-number">
+REEL 03
+</div>
+
+<div class="reel-overlay">
+
+<div class="play-button">▶</div>
+
+<div class="watch-text">
+TAP TO WATCH 💖
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- REEL 04 -->
+
+<article
+class="reel-card"
+data-video="reels/reel4.mp4"
+onclick="openReel(this)">
+
+<div class="reel-preview">
+
+<img
+src="images/reel-cover-4.jpg"
+alt="Reel 4">
+
+<div class="reel-number">
+REEL 04
+</div>
+
+<div class="reel-overlay">
+
+<div class="play-button">▶</div>
+
+<div class="watch-text">
+TAP TO WATCH ✨
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- REEL 05 -->
+
+<article
+class="reel-card"
+data-video="reels/reel5.mp4"
+onclick="openReel(this)">
+
+<div class="reel-preview">
+
+<img
+src="images/reel-cover-5.jpg"
+alt="Reel 5">
+
+<div class="reel-number">
+REEL 05
+</div>
+
+<div class="reel-overlay">
+
+<div class="play-button">▶</div>
+
+<div class="watch-text">
+TAP TO WATCH 🥰
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- REEL 06 -->
+
+<article
+class="reel-card"
+data-video="reels/reel6.mp4"
+onclick="openReel(this)">
+
+<div class="reel-preview">
+
+<img
+src="images/reel-cover-6.jpg"
+alt="Reel 6">
+
+<div class="reel-number">
+REEL 06
+</div>
+
+<div class="reel-overlay">
+
+<div class="play-button">▶</div>
+
+<div class="watch-text">
+TAP TO WATCH 💕
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- REEL 07 -->
+
+<article
+class="reel-card"
+data-video="reels/reel7.mp4"
+onclick="openReel(this)">
+
+<div class="reel-preview">
+
+<img
+src="images/reel-cover-7.jpg"
+alt="Reel 7">
+
+<div class="reel-number">
+REEL 07
+</div>
+
+<div class="reel-overlay">
+
+<div class="play-button">▶</div>
+
+<div class="watch-text">
+TAP TO WATCH 💗
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+
+<!-- REEL 08 -->
+
+<article
+class="reel-card"
+data-video="reels/reel8.mp4"
+onclick="openReel(this)">
+
+<div class="reel-preview">
+
+<img
+src="images/reel-cover-8.jpg"
+alt="Reel 8">
+
+<div class="reel-number">
+REEL 08
+</div>
+
+<div class="reel-overlay">
+
+<div class="play-button">▶</div>
+
+<div class="watch-text">
+TAP TO WATCH 💖
+</div>
+
+</div>
+
+</div>
+
+</article>
+
+</section>
+
+
+<div class="bottom-message">
+Every reel holds a little piece of our story 💕
+</div>
+
+</main>
+
+
+<!-- =====================================================
+     VIDEO MODAL
+===================================================== -->
+
+<div
+class="modal"
+id="reelModal"
+onclick="closeOutside(event)">
+
+
+<!-- ===================================================
+     DJ LIGHTING
+=================================================== -->
+
+<div class="dj-stage">
+
+  <!-- Main Moving Beams -->
+
+  <div class="dj-light left"></div>
+
+  <div class="dj-light right"></div>
+
+
+  <!-- Lasers -->
+
+  <div class="laser l1"></div>
+  <div class="laser l2"></div>
+  <div class="laser l3"></div>
+  <div class="laser l4"></div>
+
+
+  <!-- Floating Light Particles -->
+
+  <div class="light-particles">
+
+    <span style="
+      --left:8%;
+      --top:75%;
+      --duration:3s;
+      --move:30px;"></span>
+
+    <span style="
+      --left:16%;
+      --top:60%;
+      --duration:4s;
+      --move:-20px;"></span>
+
+    <span style="
+      --left:25%;
+      --top:80%;
+      --duration:3.5s;
+      --move:40px;"></span>
+
+    <span style="
+      --left:75%;
+      --top:75%;
+      --duration:4s;
+      --move:-30px;"></span>
+
+    <span style="
+      --left:84%;
+      --top:60%;
+      --duration:3s;
+      --move:20px;"></span>
+
+    <span style="
+      --left:92%;
+      --top:80%;
+      --duration:4.5s;
+      --move:-40px;"></span>
+
+  </div>
+
+
+  <!-- Equalizer -->
+
+  <div class="equalizer">
+
+    <span style="--height:25px;--speed:.45s"></span>
+    <span style="--height:42px;--speed:.32s"></span>
+    <span style="--height:30px;--speed:.55s"></span>
+    <span style="--height:50px;--speed:.38s"></span>
+    <span style="--height:36px;--speed:.47s"></span>
+    <span style="--height:48px;--speed:.34s"></span>
+    <span style="--height:28px;--speed:.52s"></span>
+    <span style="--height:44px;--speed:.4s"></span>
+    <span style="--height:34px;--speed:.48s"></span>
+    <span style="--height:52px;--speed:.31s"></span>
+
+  </div>
+
+</div>
+
+
+<!-- VIDEO -->
+
+<div class="video-container">
+
+<button
+class="close-button"
+onclick="closeReel()">
+×
+</button>
+
+<video
+id="reelVideo"
+controls
+playsinline
+preload="metadata">
+</video>
+
+</div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   OPEN REEL
+===================================================== */
+
+const modal =
+document.getElementById("reelModal");
+
+const video =
+document.getElementById("reelVideo");
+
+
+function openReel(card){
+
+  const source =
+  card.getAttribute("data-video");
+
+  if(!source) return;
+
+  video.src = source;
+
+  modal.classList.add("active");
+
+  document.body.style.overflow="hidden";
+
+  /*
+    Mobile/browser autoplay restrictions
+    ko respect karte hue video play attempt.
+  */
+
+  video.play().catch(()=>{});
+
+}
+
+
+/* =====================================================
+   CLOSE REEL
+===================================================== */
+
+function closeReel(){
+
+  video.pause();
+
+  video.removeAttribute("src");
+
+  video.load();
+
+  modal.classList.remove("active");
+
+  document.body.style.overflow="";
+
+}
+
+
+/* =====================================================
+   CLICK OUTSIDE
+===================================================== */
+
+function closeOutside(event){
+
+  if(event.target === modal){
+
+    closeReel();
+
+  }
+
+}
+
+
+/* =====================================================
+   ESC KEY
+===================================================== */
+
+document.addEventListener(
+"keydown",
+function(event){
+
+  if(event.key === "Escape"){
+
+    closeReel();
+
+  }
+
+});
+
+</script>
+
+</body>
+</html>

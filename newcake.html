@@ -1,0 +1,1452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Premium Birthday Cake</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html,body{
+    width:100%;
+    min-height:100%;
+}
+
+body{
+    overflow:hidden;
+    font-family:"Georgia",serif;
+    background:
+        radial-gradient(circle at 50% 25%,#f8a8b7 0%,#df7187 35%,#b94d65 100%);
+}
+
+/* =====================================================
+   MAIN SCENE
+===================================================== */
+
+.scene{
+    position:relative;
+    width:100vw;
+    height:100vh;
+    overflow:hidden;
+
+    background:
+        radial-gradient(
+            ellipse at center,
+            rgba(255,220,225,.5),
+            transparent 45%
+        ),
+        linear-gradient(
+            180deg,
+            #d96d80,
+            #bd5369 60%,
+            #9f4058
+        );
+}
+
+/* =====================================================
+   SOFT LIGHT
+===================================================== */
+
+.light{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(70px);
+    pointer-events:none;
+}
+
+.light.one{
+    width:400px;
+    height:400px;
+    left:-100px;
+    top:-100px;
+    background:#ffb9c7;
+    opacity:.55;
+}
+
+.light.two{
+    width:500px;
+    height:500px;
+    right:-160px;
+    top:80px;
+    background:#ffb5c5;
+    opacity:.35;
+}
+
+.light.three{
+    width:600px;
+    height:300px;
+    left:50%;
+    bottom:-180px;
+    transform:translateX(-50%);
+    background:#ff9db2;
+    opacity:.5;
+}
+
+/* =====================================================
+   BOKEH
+===================================================== */
+
+.bokeh{
+    position:absolute;
+    border-radius:50%;
+    background:rgba(255,255,255,.5);
+    filter:blur(2px);
+    box-shadow:0 0 20px rgba(255,255,255,.7);
+    animation:float 5s ease-in-out infinite alternate;
+}
+
+.b1{width:7px;height:7px;left:18%;top:17%;}
+.b2{width:5px;height:5px;left:32%;top:28%;animation-delay:1s;}
+.b3{width:8px;height:8px;right:26%;top:18%;animation-delay:2s;}
+.b4{width:5px;height:5px;right:17%;top:38%;animation-delay:1.5s;}
+.b5{width:6px;height:6px;left:25%;top:45%;animation-delay:3s;}
+.b6{width:8px;height:8px;right:35%;top:32%;animation-delay:.5s;}
+
+@keyframes float{
+    from{
+        transform:translateY(0);
+        opacity:.35;
+    }
+    to{
+        transform:translateY(-18px);
+        opacity:1;
+    }
+}
+
+/* =====================================================
+   HEART PARTICLES
+===================================================== */
+
+.heart{
+    position:absolute;
+    color:#fff;
+    font-size:18px;
+    opacity:.8;
+    animation:heartFloat 5s ease-in-out infinite;
+}
+
+.h1{left:22%;top:31%;}
+.h2{left:30%;top:42%;animation-delay:1s;}
+.h3{right:28%;top:30%;animation-delay:2s;}
+.h4{right:20%;top:45%;animation-delay:3s;}
+.h5{left:42%;top:27%;animation-delay:1.5s;}
+
+@keyframes heartFloat{
+    0%,100%{
+        transform:translateY(0) scale(.8);
+        opacity:.4;
+    }
+    50%{
+        transform:translateY(-15px) scale(1.15);
+        opacity:1;
+    }
+}
+
+/* =====================================================
+   TOP TEXT
+===================================================== */
+
+.heading{
+    position:absolute;
+    top:4%;
+    left:50%;
+    transform:translateX(-50%);
+    width:100%;
+    text-align:center;
+    z-index:30;
+    color:white;
+}
+
+.heading .small{
+    font-family:Arial,sans-serif;
+    font-size:clamp(13px,1.5vw,20px);
+    letter-spacing:9px;
+    font-weight:500;
+    margin-bottom:8px;
+}
+
+.heading h1{
+    font-size:clamp(45px,7vw,95px);
+    font-weight:400;
+    line-height:.9;
+
+    text-shadow:
+        0 3px 15px rgba(255,255,255,.6),
+        0 0 30px rgba(255,210,220,.7);
+}
+
+.heading h1::first-letter{
+    font-size:1.05em;
+}
+
+.heading p{
+    margin-top:18px;
+    font-family:Arial,sans-serif;
+    font-size:clamp(11px,1.3vw,18px);
+    letter-spacing:5px;
+}
+
+/* =====================================================
+   BALLOONS
+===================================================== */
+
+.balloon{
+    position:absolute;
+    width:105px;
+    height:135px;
+    border-radius:50%;
+    z-index:3;
+
+    background:
+        radial-gradient(
+            circle at 30% 25%,
+            rgba(255,255,255,.8),
+            transparent 13%
+        ),
+        linear-gradient(
+            135deg,
+            #ffc1ce,
+            #e98fa4
+        );
+
+    box-shadow:
+        inset -18px -15px 25px rgba(120,30,50,.18),
+        0 10px 25px rgba(80,20,35,.25);
+
+    animation:balloonMove 5s ease-in-out infinite alternate;
+}
+
+.balloon::after{
+    content:"";
+    position:absolute;
+    width:1px;
+    height:170px;
+    background:rgba(255,255,255,.55);
+    top:125px;
+    left:50%;
+}
+
+.balloon::before{
+    content:"";
+    position:absolute;
+    bottom:-8px;
+    left:50%;
+    transform:translateX(-50%);
+    width:12px;
+    height:15px;
+    background:#d8788d;
+    clip-path:polygon(0 0,100% 0,50% 100%);
+}
+
+.balloon.left1{
+    left:1%;
+    top:14%;
+    transform:rotate(-12deg);
+}
+
+.balloon.left2{
+    left:-1%;
+    top:34%;
+    width:125px;
+    height:155px;
+    transform:rotate(-18deg);
+}
+
+.balloon.right1{
+    right:1%;
+    top:15%;
+    transform:rotate(12deg);
+}
+
+.balloon.right2{
+    right:-2%;
+    top:34%;
+    width:125px;
+    height:155px;
+    transform:rotate(16deg);
+}
+
+@keyframes balloonMove{
+    from{margin-top:0;}
+    to{margin-top:-12px;}
+}
+
+/* =====================================================
+   GLASS BALLOON
+===================================================== */
+
+.glass-balloon{
+    position:absolute;
+    width:95px;
+    height:120px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.4);
+    background:rgba(255,210,220,.12);
+    box-shadow:
+        inset 0 0 30px rgba(255,255,255,.18),
+        0 0 20px rgba(255,255,255,.18);
+    z-index:2;
+}
+
+.glass-balloon.left{
+    left:9%;
+    top:30%;
+}
+
+.glass-balloon.right{
+    right:9%;
+    top:30%;
+}
+
+/* =====================================================
+   FLOWER ARRANGEMENTS
+===================================================== */
+
+.flowers{
+    position:absolute;
+    width:210px;
+    height:230px;
+    z-index:7;
+}
+
+.flowers.left{
+    left:0;
+    bottom:4%;
+}
+
+.flowers.right{
+    right:0;
+    bottom:4%;
+}
+
+/* vase */
+
+.vase{
+    position:absolute;
+    bottom:0;
+    left:50%;
+    transform:translateX(-50%);
+    width:90px;
+    height:120px;
+    border-radius:20px 20px 35px 35px;
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,.15),
+            rgba(255,220,225,.45),
+            rgba(255,255,255,.1)
+        );
+    border:1px solid rgba(255,255,255,.3);
+}
+
+/* roses */
+
+.rose{
+    position:absolute;
+    width:55px;
+    height:55px;
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffd0d9 0 12%,
+            #f59aaa 14% 28%,
+            #ed8296 30% 45%,
+            #db667e 48% 65%,
+            #c9516a 70%
+        );
+
+    box-shadow:
+        0 5px 10px rgba(90,20,35,.25);
+}
+
+.rose::after{
+    content:"";
+    position:absolute;
+    inset:9px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,.22);
+}
+
+.r1{left:18px;top:55px;}
+.r2{left:70px;top:25px;transform:scale(1.15);}
+.r3{left:115px;top:60px;transform:scale(.95);}
+.r4{left:55px;top:100px;transform:scale(.8);}
+.r5{left:135px;top:110px;transform:scale(.75);}
+
+.leaf{
+    position:absolute;
+    width:45px;
+    height:22px;
+    background:#547f4d;
+    border-radius:100% 0 100% 0;
+    transform:rotate(-25deg);
+}
+
+.leaf.l1{left:30px;top:120px;}
+.leaf.l2{left:120px;top:35px;transform:rotate(35deg);}
+.leaf.l3{left:150px;top:85px;transform:rotate(65deg);}
+.leaf.l4{left:55px;top:45px;transform:rotate(150deg);}
+
+/* =====================================================
+   LANTERNS
+===================================================== */
+
+.lantern{
+    position:absolute;
+    width:75px;
+    height:105px;
+    bottom:10%;
+    z-index:10;
+
+    border:2px solid rgba(255,235,225,.55);
+    background:rgba(255,220,220,.12);
+    box-shadow:
+        0 0 30px rgba(255,220,160,.45),
+        inset 0 0 20px rgba(255,255,255,.15);
+}
+
+.lantern.left{
+    left:7%;
+}
+
+.lantern.right{
+    right:7%;
+}
+
+.lantern .roof{
+    position:absolute;
+    top:-17px;
+    left:-7px;
+    width:85px;
+    height:25px;
+    background:#f5c7c7;
+    clip-path:polygon(50% 0,100% 100%,0 100%);
+}
+
+.lantern .light{
+    position:absolute;
+    width:22px;
+    height:22px;
+    background:#fff5c5;
+    border-radius:50%;
+    left:50%;
+    top:45%;
+    transform:translate(-50%,-50%);
+    filter:blur(4px);
+    box-shadow:0 0 30px #ffe8a8;
+}
+
+/* =====================================================
+   GIFTS
+===================================================== */
+
+.gift{
+    position:absolute;
+    bottom:3%;
+    width:95px;
+    height:75px;
+    background:#ef9caf;
+    z-index:11;
+    box-shadow:0 10px 20px rgba(80,20,30,.25);
+}
+
+.gift.left{
+    left:1%;
+}
+
+.gift.right{
+    right:1%;
+}
+
+.gift::before{
+    content:"";
+    position:absolute;
+    width:16px;
+    height:100%;
+    background:#ffd2da;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.gift::after{
+    content:"";
+    position:absolute;
+    width:100%;
+    height:13px;
+    background:#ffd2da;
+    top:50%;
+    transform:translateY(-50%);
+}
+
+/* =====================================================
+   CAKE AREA
+===================================================== */
+
+.cake-area{
+    position:absolute;
+    left:50%;
+    bottom:-2%;
+    transform:translateX(-50%);
+    width:min(600px,70vw);
+    height:57vh;
+    min-height:390px;
+    z-index:20;
+}
+
+/* cake shadow */
+
+.cake-shadow{
+    position:absolute;
+    bottom:20px;
+    left:50%;
+    transform:translateX(-50%);
+    width:520px;
+    height:65px;
+    border-radius:50%;
+    background:rgba(70,10,25,.35);
+    filter:blur(20px);
+}
+
+/* =====================================================
+   PLATE
+===================================================== */
+
+.plate{
+    position:absolute;
+    bottom:30px;
+    left:50%;
+    transform:translateX(-50%);
+    width:530px;
+    height:75px;
+    border-radius:50%;
+    background:
+        linear-gradient(
+            180deg,
+            #fff4f5,
+            #efc7cf
+        );
+
+    box-shadow:
+        0 15px 30px rgba(70,15,25,.3),
+        inset 0 5px 10px white;
+}
+
+/* =====================================================
+   BOTTOM CAKE
+===================================================== */
+
+.bottom-cake{
+    position:absolute;
+    left:50%;
+    bottom:75px;
+    transform:translateX(-50%);
+    width:430px;
+    height:220px;
+
+    border-radius:
+        25px
+        25px
+        45px
+        45px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #e9b4bd,
+            #f9d9dd 20%,
+            #fbe4e7 50%,
+            #f7d2d8 80%,
+            #dfa1ad
+        );
+
+    box-shadow:
+        inset 0 10px 20px rgba(255,255,255,.7),
+        inset 0 -20px 25px rgba(140,50,70,.12),
+        0 20px 30px rgba(80,15,30,.22);
+}
+
+/* =====================================================
+   MIDDLE CAKE
+===================================================== */
+
+.middle-cake{
+    position:absolute;
+    left:50%;
+    bottom:245px;
+    transform:translateX(-50%);
+    width:330px;
+    height:175px;
+
+    border-radius:
+        22px
+        22px
+        35px
+        35px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #eab4bd,
+            #fce1e4 25%,
+            #fff0f1 50%,
+            #f9dce0 75%,
+            #dfa0ac
+        );
+
+    box-shadow:
+        inset 0 8px 15px rgba(255,255,255,.8),
+        inset 0 -15px 20px rgba(120,40,60,.12),
+        0 12px 25px rgba(70,15,30,.2);
+}
+
+/* =====================================================
+   PEARLS
+===================================================== */
+
+.pearls{
+    position:absolute;
+    display:flex;
+    gap:6px;
+    z-index:25;
+}
+
+.pearls.bottom{
+    bottom:82px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.pearls.middle{
+    bottom:244px;
+    left:50%;
+    transform:translateX(-50%);
+}
+
+.pearl{
+    width:9px;
+    height:9px;
+    border-radius:50%;
+    background:
+        radial-gradient(circle at 30% 25%,white,#efc5cd 55%,#bd7c8d);
+    box-shadow:0 2px 4px rgba(80,20,30,.2);
+}
+
+/* =====================================================
+   TOP CAKE
+===================================================== */
+
+.top-cake{
+    position:absolute;
+    left:50%;
+    bottom:390px;
+    transform:translateX(-50%);
+    width:240px;
+    height:145px;
+
+    border-radius:
+        20px
+        20px
+        30px
+        30px;
+
+    background:
+        linear-gradient(
+            90deg,
+            #eab3bc,
+            #fce1e4 25%,
+            #fff1f2 50%,
+            #f8d9de 75%,
+            #dca0ad
+        );
+
+    box-shadow:
+        inset 0 7px 15px rgba(255,255,255,.8),
+        inset 0 -12px 18px rgba(120,40,60,.12),
+        0 10px 20px rgba(60,10,25,.18);
+}
+
+/* =====================================================
+   CAKE PEARL TEXTURE
+===================================================== */
+
+.sugar{
+    position:absolute;
+    width:5px;
+    height:5px;
+    border-radius:50%;
+    background:#fff;
+    opacity:.7;
+    box-shadow:0 0 3px #fff;
+}
+
+.sugar:nth-child(1){left:25%;top:20%}
+.sugar:nth-child(2){left:40%;top:35%}
+.sugar:nth-child(3){left:65%;top:22%}
+.sugar:nth-child(4){left:75%;top:50%}
+.sugar:nth-child(5){left:32%;top:62%}
+.sugar:nth-child(6){left:55%;top:70%}
+.sugar:nth-child(7){left:18%;top:48%}
+.sugar:nth-child(8){left:82%;top:35%}
+
+/* =====================================================
+   ROSES ON CAKE
+===================================================== */
+
+.cake-flowers{
+    position:absolute;
+    left:50%;
+    bottom:485px;
+    transform:translateX(-50%);
+    width:270px;
+    height:100px;
+    z-index:35;
+}
+
+.cake-rose{
+    position:absolute;
+    width:62px;
+    height:62px;
+    border-radius:50%;
+
+    background:
+        radial-gradient(
+            circle,
+            #ffdce2 0 10%,
+            #f49aaa 14% 28%,
+            #e9788e 32% 45%,
+            #d65b74 48% 65%,
+            #c74d67 70%
+        );
+
+    box-shadow:0 5px 10px rgba(80,10,30,.2);
+}
+
+.cr1{left:35px;top:20px;}
+.cr2{left:100px;top:5px;transform:scale(1.12);}
+.cr3{left:165px;top:25px;}
+.cr4{left:85px;top:40px;transform:scale(.75);}
+
+/* =====================================================
+   GREEN LEAVES
+===================================================== */
+
+.cake-leaf{
+    position:absolute;
+    width:55px;
+    height:25px;
+    border-radius:100% 0 100% 0;
+    background:#557d4e;
+}
+
+.cl1{left:20px;top:65px;transform:rotate(20deg);}
+.cl2{right:18px;top:55px;transform:rotate(160deg);}
+.cl3{left:115px;top:0;transform:rotate(50deg);}
+
+/* =====================================================
+   GOLD TOPPER
+===================================================== */
+
+.topper{
+    position:absolute;
+    left:50%;
+    bottom:530px;
+    transform:translateX(-50%);
+    z-index:50;
+
+    color:#c48b32;
+
+    font-size:43px;
+    line-height:.85;
+    text-align:center;
+
+    font-family:
+        "Brush Script MT",
+        cursive;
+
+    text-shadow:
+        1px 1px 0 #f8d98b,
+        2px 3px 5px rgba(80,40,10,.35);
+}
+
+.topper-stick{
+    position:absolute;
+    width:2px;
+    height:45px;
+    background:#c3913d;
+    left:50%;
+    bottom:-38px;
+}
+
+/* =====================================================
+   CAKE MESSAGE
+===================================================== */
+
+.cake-name{
+    position:absolute;
+    bottom:45px;
+    left:50%;
+    transform:translateX(-50%);
+    z-index:40;
+
+    color:#e27587;
+
+    font-family:
+        "Brush Script MT",
+        cursive;
+
+    font-size:32px;
+    white-space:nowrap;
+
+    text-shadow:
+        1px 1px 0 white,
+        0 2px 4px rgba(100,30,40,.2);
+}
+
+/* =====================================================
+   CANDLES
+===================================================== */
+
+.candles{
+    position:absolute;
+    left:50%;
+    bottom:520px;
+    transform:translateX(-50%);
+    display:flex;
+    gap:18px;
+    z-index:55;
+}
+
+.candle{
+    width:10px;
+    height:45px;
+    border-radius:5px;
+
+    background:
+        repeating-linear-gradient(
+            135deg,
+            #f8c0c9 0 7px,
+            #fff 7px 14px
+        );
+}
+
+.flame{
+    position:absolute;
+    width:16px;
+    height:25px;
+    margin-left:-3px;
+    margin-top:-24px;
+
+    border-radius:50% 50% 50% 50%;
+
+    background:
+        radial-gradient(
+            circle at 50% 70%,
+            #fff 0 15%,
+            #ffe04d 30%,
+            #ff8b31 60%,
+            transparent 70%
+        );
+
+    filter:
+        drop-shadow(0 0 8px #ffbd4a)
+        drop-shadow(0 0 15px #ff8c4a);
+
+    animation:flame .15s infinite alternate;
+}
+
+@keyframes flame{
+    from{
+        transform:scale(1) rotate(-3deg);
+    }
+    to{
+        transform:scale(.9,1.1) rotate(4deg);
+    }
+}
+
+/* =====================================================
+   FLOOR DECORATION
+===================================================== */
+
+.ribbon{
+    position:absolute;
+    bottom:0;
+    width:170px;
+    height:45px;
+    border-radius:50%;
+    background:rgba(255,190,205,.65);
+    filter:blur(1px);
+}
+
+.ribbon.r1{
+    left:15%;
+    transform:rotate(20deg);
+}
+
+.ribbon.r2{
+    right:15%;
+    transform:rotate(-20deg);
+}
+
+.rose-petal{
+    position:absolute;
+    width:14px;
+    height:8px;
+    border-radius:100% 0 100% 0;
+    background:#f29aaa;
+    opacity:.8;
+}
+
+.petal1{left:25%;bottom:8%}
+.petal2{left:35%;bottom:4%}
+.petal3{right:28%;bottom:7%}
+.petal4{right:38%;bottom:3%}
+
+/* =====================================================
+   BOTTOM HEART CANDLES
+===================================================== */
+
+.heart-candle{
+    position:absolute;
+    bottom:6%;
+    width:45px;
+    height:40px;
+    z-index:30;
+}
+
+.heart-candle::before{
+    content:"♥";
+    color:#ffbdc9;
+    font-size:48px;
+    text-shadow:0 0 15px rgba(255,220,225,.9);
+}
+
+.heart-candle::after{
+    content:"";
+    position:absolute;
+    width:13px;
+    height:20px;
+    left:16px;
+    top:-10px;
+    border-radius:50%;
+    background:radial-gradient(circle,#fff,#ffd84f,#ff8b32,transparent 70%);
+    filter:blur(1px);
+    animation:flame .15s infinite alternate;
+}
+
+.heart-candle.left{
+    left:17%;
+}
+
+.heart-candle.right{
+    right:17%;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:800px){
+
+    .heading{
+        top:3%;
+    }
+
+    .heading .small{
+        letter-spacing:5px;
+    }
+
+    .heading p{
+        letter-spacing:2px;
+    }
+
+    .balloon{
+        transform:scale(.65);
+    }
+
+    .flowers{
+        transform:scale(.7);
+        transform-origin:bottom;
+    }
+
+    .lantern{
+        transform:scale(.7);
+    }
+
+    .gift{
+        transform:scale(.7);
+    }
+
+    .cake-area{
+        transform:
+            translateX(-50%)
+            scale(.7);
+        transform-origin:bottom center;
+        bottom:-3%;
+    }
+}
+
+@media(max-width:500px){
+
+    .heading h1{
+        font-size:43px;
+    }
+
+    .heading .small{
+        font-size:10px;
+        letter-spacing:4px;
+    }
+
+    .heading p{
+        font-size:9px;
+    }
+
+    .balloon{
+        transform:scale(.45);
+    }
+
+    .flowers{
+        transform:scale(.48);
+    }
+
+    .lantern{
+        transform:scale(.5);
+    }
+
+    .gift{
+        transform:scale(.5);
+    }
+
+    .cake-area{
+        transform:
+            translateX(-50%)
+            scale(.48);
+        bottom:-5%;
+    }
+
+    .heart-candle{
+        display:none;
+    }
+}
+
+/* =====================================================
+   REDUCED MOTION
+===================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+    *,
+    *::before,
+    *::after{
+        animation:none !important;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="scene">
+
+    <!-- SOFT LIGHT -->
+    <div class="light one"></div>
+    <div class="light two"></div>
+    <div class="light three"></div>
+
+    <!-- BOKEH -->
+    <div class="bokeh b1"></div>
+    <div class="bokeh b2"></div>
+    <div class="bokeh b3"></div>
+    <div class="bokeh b4"></div>
+    <div class="bokeh b5"></div>
+    <div class="bokeh b6"></div>
+
+    <!-- HEARTS -->
+    <div class="heart h1">♥</div>
+    <div class="heart h2">♥</div>
+    <div class="heart h3">♥</div>
+    <div class="heart h4">♥</div>
+    <div class="heart h5">♥</div>
+
+
+    <!-- =================================================
+         TOP TITLE
+    ================================================= -->
+
+    <div class="heading">
+
+        <div class="small">
+            H A P P Y
+        </div>
+
+        <h1>
+            Birthday
+        </h1>
+
+        <p>
+            WISHING YOU ALL THE HAPPINESS IN THE WORLD
+        </p>
+
+    </div>
+
+
+    <!-- =================================================
+         BALLOONS
+    ================================================= -->
+
+    <div class="balloon left1"></div>
+    <div class="balloon left2"></div>
+
+    <div class="balloon right1"></div>
+    <div class="balloon right2"></div>
+
+    <div class="glass-balloon left"></div>
+    <div class="glass-balloon right"></div>
+
+
+    <!-- =================================================
+         LEFT FLOWERS
+    ================================================= -->
+
+    <div class="flowers left">
+
+        <div class="rose r1"></div>
+        <div class="rose r2"></div>
+        <div class="rose r3"></div>
+        <div class="rose r4"></div>
+        <div class="rose r5"></div>
+
+        <div class="leaf l1"></div>
+        <div class="leaf l2"></div>
+        <div class="leaf l3"></div>
+        <div class="leaf l4"></div>
+
+        <div class="vase"></div>
+
+    </div>
+
+
+    <!-- =================================================
+         RIGHT FLOWERS
+    ================================================= -->
+
+    <div class="flowers right">
+
+        <div class="rose r1"></div>
+        <div class="rose r2"></div>
+        <div class="rose r3"></div>
+        <div class="rose r4"></div>
+        <div class="rose r5"></div>
+
+        <div class="leaf l1"></div>
+        <div class="leaf l2"></div>
+        <div class="leaf l3"></div>
+        <div class="leaf l4"></div>
+
+        <div class="vase"></div>
+
+    </div>
+
+
+    <!-- =================================================
+         LANTERNS
+    ================================================= -->
+
+    <div class="lantern left">
+        <div class="roof"></div>
+        <div class="light"></div>
+    </div>
+
+    <div class="lantern right">
+        <div class="roof"></div>
+        <div class="light"></div>
+    </div>
+
+
+    <!-- =================================================
+         GIFTS
+    ================================================= -->
+
+    <div class="gift left"></div>
+    <div class="gift right"></div>
+
+
+    <!-- =================================================
+         CAKE
+    ================================================= -->
+
+    <div class="cake-area">
+
+        <div class="cake-shadow"></div>
+
+        <!-- PLATE -->
+        <div class="plate"></div>
+
+        <!-- BOTTOM CAKE -->
+        <div class="bottom-cake">
+
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+
+        </div>
+
+
+        <!-- MIDDLE CAKE -->
+        <div class="middle-cake">
+
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+
+        </div>
+
+
+        <!-- TOP CAKE -->
+        <div class="top-cake">
+
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+            <div class="sugar"></div>
+
+        </div>
+
+
+        <!-- CAKE ROSES -->
+        <div class="cake-flowers">
+
+            <div class="cake-rose cr1"></div>
+            <div class="cake-rose cr2"></div>
+            <div class="cake-rose cr3"></div>
+            <div class="cake-rose cr4"></div>
+
+            <div class="cake-leaf cl1"></div>
+            <div class="cake-leaf cl2"></div>
+            <div class="cake-leaf cl3"></div>
+
+        </div>
+
+
+        <!-- PEARLS -->
+        <div class="pearls bottom">
+
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+
+        </div>
+
+
+        <div class="pearls middle">
+
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+            <span class="pearl"></span>
+
+        </div>
+
+
+        <!-- GOLD BIRTHDAY TOPPER -->
+        <div class="topper">
+
+            Happy<br>
+            Birthday
+
+            <div class="topper-stick"></div>
+
+        </div>
+
+
+        <!-- CANDLES -->
+        <div class="candles">
+
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
+
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
+
+            <div class="candle">
+                <div class="flame"></div>
+            </div>
+
+        </div>
+
+
+        <!-- NAME -->
+        <div class="cake-name">
+            Mahika Illo
+        </div>
+
+    </div>
+
+
+    <!-- =================================================
+         FLOOR DECORATION
+    ================================================= -->
+
+    <div class="ribbon r1"></div>
+    <div class="ribbon r2"></div>
+
+    <div class="rose-petal petal1"></div>
+    <div class="rose-petal petal2"></div>
+    <div class="rose-petal petal3"></div>
+    <div class="rose-petal petal4"></div>
+
+
+    <!-- HEART CANDLES -->
+    <div class="heart-candle left"></div>
+    <div class="heart-candle right"></div>
+
+</div>
+
+
+<script>
+
+/* =====================================================
+   FLOATING LIGHT PARTICLES
+===================================================== */
+
+const scene = document.querySelector(".scene");
+
+for(let i=0;i<35;i++){
+
+    const particle = document.createElement("div");
+
+    particle.style.position = "absolute";
+    particle.style.width = Math.random()*4 + 2 + "px";
+    particle.style.height = particle.style.width;
+    particle.style.borderRadius = "50%";
+    particle.style.background = "rgba(255,255,255,.8)";
+    particle.style.boxShadow = "0 0 10px white";
+
+    particle.style.left =
+        Math.random()*100 + "%";
+
+    particle.style.top =
+        Math.random()*100 + "%";
+
+    particle.style.animation =
+        `particleFloat ${4+Math.random()*6}s ease-in-out infinite`;
+
+    particle.style.animationDelay =
+        Math.random()*5 + "s";
+
+    scene.appendChild(particle);
+}
+
+
+/* =====================================================
+   PARTICLE ANIMATION
+===================================================== */
+
+const style = document.createElement("style");
+
+style.innerHTML = `
+
+@keyframes particleFloat{
+
+    0%,100%{
+        transform:
+            translateY(0)
+            scale(.5);
+
+        opacity:.15;
+    }
+
+    50%{
+        transform:
+            translateY(-30px)
+            scale(1.5);
+
+        opacity:.9;
+    }
+
+}
+
+`;
+
+document.head.appendChild(style);
+
+
+/* =====================================================
+   MOUSE PARALLAX
+===================================================== */
+
+document.addEventListener("mousemove",(e)=>{
+
+    const x =
+        (e.clientX / window.innerWidth - .5);
+
+    const y =
+        (e.clientY / window.innerHeight - .5);
+
+    document.querySelector(".cake-area").style.transform =
+        `translateX(calc(-50% + ${x*10}px))
+         translateY(${y*5}px)`;
+
+});
+
+
+/* =====================================================
+   TOUCH FRIENDLY
+===================================================== */
+
+document.addEventListener("touchmove",(e)=>{
+
+    const touch = e.touches[0];
+
+    const x =
+        (touch.clientX / window.innerWidth - .5);
+
+    const y =
+        (touch.clientY / window.innerHeight - .5);
+
+    document.querySelector(".cake-area").style.transform =
+        `translateX(calc(-50% + ${x*6}px))
+         translateY(${y*3}px)`;
+
+});
+
+</script>
+
+</body>
+</html>
